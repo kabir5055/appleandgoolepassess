@@ -28,72 +28,7 @@ class GooglePassGeneratorController extends Controller
 {
     public function generatePass(Request $request)
     {
-        // Provided JSON structure
         $data = $request->all();
-// '{
-//          "id": "3388000000022301125.coupon15",
-//          "classId": "3388000000022301125.coupon15",
-//          "logo": {
-//            "sourceUri": {
-//              "uri": "https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/pass_google_logo.jpg"
-//            },
-//            "contentDescription": {
-//              "defaultValue": {
-//                "language": "en-US",
-//                "value": "LOGO_IMAGE_DESCRIPTION"
-//              }
-//            }
-//          },
-//          "cardTitle": {
-//            "defaultValue": {
-//              "language": "en-US",
-//              "value": "TEST"
-//            }
-//          },
-//          "subheader": {
-//            "defaultValue": {
-//              "language": "en-US",
-//              "value": "Attendee"
-//            }
-//          },
-//          "header": {
-//            "defaultValue": {
-//              "language": "en-US",
-//              "value": "Alex McJacobs"
-//            }
-//          },
-//          "textModulesData": [
-//            {
-//              "id": "points",
-//              "header": "POINTS",
-//              "body": "1112"
-//            },
-//            {
-//              "id": "contacts",
-//              "header": "CONTACTS",
-//              "body": "79"
-//            }
-//          ],
-//          "barcode": {
-//            "type": "QR_CODE",
-//            "value": "https://luminouslabsbd.com/",
-//            "alternateText": ""
-//          },
-//          "hexBackgroundColor": "#4285f4",
-//          "heroImage": {
-//            "sourceUri": {
-//              "uri": "https://storage.googleapis.com/wallet-lab-tools-codelab-artifacts-public/google-io-hero-demo-only.png"
-//            },
-//            "contentDescription": {
-//              "defaultValue": {
-//                "language": "en-US",
-//                "value": "HERO_IMAGE_DESCRIPTION"
-//              }
-//            }
-//          }
-//        }';
-
-//        $data = json_decode($json, true);
 
         $object = new GenericObject(
             classId: $data['classId']. '_' . time(),
