@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PassGeneratorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GooglePassGeneratorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +22,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/generate-pass', [PassGeneratorController::class, 'generatePass']);
-Route::post('/google-generate-pass', [\App\Http\Controllers\GooglePassGeneratorController::class, 'generatePass']);
+Route::post('/google-generate-pass', [GooglePassGeneratorController::class, 'generatePass']);
+
+
+Route::post('/login', [LoginController::class,'login']);
+Route::post('/register', [LoginController::class,'register']);
+
+Route::middleware('auth:api')->group(function (){
+    Route::get('/get-user', [LoginController::class,'getUser']);
+});
+//Route::post('/password/reset', [LoginController::class,'passwordReset']);

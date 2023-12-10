@@ -16,15 +16,17 @@ class PassGeneratorController extends Controller
 {
     public function generatePass(Request $request)
     {
-        $request->validate([
-            'headerFields' => 'array',
-            'secondaryFields' => 'array',
-            'backFields' => 'array',
-        ]);
+//        $request->validate([
+//            'headerFields' => 'array',
+//            'primaryFields' => 'array',
+//            'backFields' => 'array',
+//        ]);
+//
+//        $headerFields = $request->input('headerFields', []);
+//        $primaryFields = $request->input('primaryFields', []);
+//        $backFields = $request->input('backFields', []);
 
-        $headerFields = $request->input('headerFields', []);
-        $secondaryFields = $request->input('secondaryFields', []);
-        $backFields = $request->input('backFields', []);
+//        dd($primaryFields);
 
         $pass = new Coupon(
             description: '15% off purchases',
@@ -43,9 +45,19 @@ class PassGeneratorController extends Controller
                 'message' => 'Hello',
                 'messageEncoding' => 'utf-8',
             ],
-            headerFields: $headerFields,
-            secondaryFields: $secondaryFields,
-            backFields: $backFields,
+//            headerFields: $headerFields,
+//            primaryFields: $primaryFields,
+//            backFields: $backFields,
+            headerFields: [
+                new SecondaryField(key: 'coupon-type', value: "#15-percent"),
+            ],
+            secondaryFields: [
+                new SecondaryField(key: 'name', value: '15% off all purchases', label: 'Your Coupon'),
+                new SecondaryField(key: 'expiration', value: '01.01.2022', label: 'Valid Until'),
+            ],
+            backFields: [
+                new Field(key: 'terms', value: 'Lorem Ipsum', label: 'Terms of Use'),
+            ],
         );
 
         $pass

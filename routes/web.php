@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GooglePassGeneratorController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PassGeneratorController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,9 @@ Route::get('/', function () {
 
 Route::get('/generate-pass', [PassGeneratorController::class, 'generatePass']);
 Route::get('/google-generate-pass', [GooglePassGeneratorController::class, 'generatePass']);
+
+
+//Route::post('/login', [LoginController::class,'login']);
+//Route::post('/register', [LoginController::class,'register']);
+//Route::post('/password/reset', [LoginController::class,'passwordReset']);
+
