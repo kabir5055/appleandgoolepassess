@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\PasswordReset;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -59,7 +59,7 @@ class LoginController extends Controller
             $user = User::where('email',$request->email)->get();
 
             if (count($user)>0) {
-                $token = Str::rendom();
+                $token =Str::random();
                 $domain = URL::to('/');
                 $url = $domain."/password-reset=".$token;
 
@@ -83,13 +83,15 @@ class LoginController extends Controller
                     ],
                 ]);
 
+                return response()->json(['success'=> true, 'massage'=>"Please Check Your Email..."],200);
+
             }else{
-                return response()->json(['success'=> false, 'massage'=>"User Not Found"]);
+                return response()->json(['success'=> false, 'massage'=>"User Not Found"],401);
             }
 
         }catch (Exception $e)
         {
-            return response()->json(['success'=>false,'massage'=>$e->getMessage()]);
+            return response()->json(['success'=>false,'massage'=>$e->getMessage()],500);
         }
     }
 }

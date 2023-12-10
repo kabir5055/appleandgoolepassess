@@ -9,9 +9,9 @@ class PasswordReset extends Model
 {
     use HasFactory;
 
-    public $token = 'password_reset_tokens';
+    public $table = 'password_reset_tokens';
     public $timestamps = false;
-//    protected
+    protected $primaryKey = 'email';
 
     protected $fillable = [
         'email',
