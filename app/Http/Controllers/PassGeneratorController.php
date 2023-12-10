@@ -17,6 +17,34 @@ class PassGeneratorController extends Controller
 {
     public function generatePass(Request $request)
     {
+
+        $jsonData = $request[0];
+        $jsonData2 = json_encode($jsonData);
+        $jsonData3 = json_decode($jsonData2);
+        $dataArray=[];
+        foreach ($jsonData3 as $key=>$item) {
+//            return $item->displayValue->value;
+            $dataArray['key'][] =   $key ?? "";
+            $dataArray['value'][] =  $item->label->value ?? "";
+            $dataArray['display'][] =   $item->displayValue->value ?? "";
+
+            new SecondaryField(key: 'name', value: '15% off all purchases', label: 'Your Coupon');
+        }
+        return $dataArray;
+
+        return $jsonData3->email->label->value;
+//        r($jsonData);
+        // Call the function to convert JSON to array
+        $dataArray = $this->convertJsonToArray($jsonData);
+
+        dd($dataArray);
+
+
+
+
+
+
+
         $user = Auth::id();
 
         $request->validate([
