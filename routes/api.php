@@ -32,3 +32,4 @@ Route::middleware('auth:api')->group(function (){
     Route::get('/get-user', [LoginController::class,'getUser']);
 });
 //Route::post('/password/reset', [LoginController::class,'passwordReset']);
+Route::post('/forget-reset', [LoginController::class,'forgetReset']);

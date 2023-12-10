@@ -10,21 +10,24 @@ use Chiiya\Passes\Apple\Enumerators\ImageType;
 use Chiiya\Passes\Apple\Components\Image;
 use Chiiya\Passes\Apple\PassFactory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use ZipArchive;
 
 class PassGeneratorController extends Controller
 {
     public function generatePass(Request $request)
     {
-//        $request->validate([
-//            'headerFields' => 'array',
-//            'primaryFields' => 'array',
-//            'backFields' => 'array',
-//        ]);
-//
-//        $headerFields = $request->input('headerFields', []);
-//        $primaryFields = $request->input('primaryFields', []);
-//        $backFields = $request->input('backFields', []);
+        $user = Auth::id();
+
+        $request->validate([
+            'headerFields' => 'array',
+            'primaryFields' => 'array',
+            'backFields' => 'array',
+        ]);
+
+        $headerFields = $request->input('headerFields', []);
+        $primaryFields = $request->input('primaryFields', []);
+        $backFields = $request->input('backFields', []);
 
 //        dd($primaryFields);
 
@@ -45,19 +48,19 @@ class PassGeneratorController extends Controller
                 'message' => 'Hello',
                 'messageEncoding' => 'utf-8',
             ],
-//            headerFields: $headerFields,
-//            primaryFields: $primaryFields,
-//            backFields: $backFields,
-            headerFields: [
-                new SecondaryField(key: 'coupon-type', value: "#15-percent"),
-            ],
-            secondaryFields: [
-                new SecondaryField(key: 'name', value: '15% off all purchases', label: 'Your Coupon'),
-                new SecondaryField(key: 'expiration', value: '01.01.2022', label: 'Valid Until'),
-            ],
-            backFields: [
-                new Field(key: 'terms', value: 'Lorem Ipsum', label: 'Terms of Use'),
-            ],
+            headerFields: $headerFields,
+            primaryFields: $primaryFields,
+            backFields: $backFields,
+//            headerFields: [
+//                new SecondaryField(key: 'coupon-type', value: "#15-percent"),
+//            ],
+//            secondaryFields: [
+//                new SecondaryField(key: 'name', value: '15% off all purchases', label: 'Your Coupon'),
+//                new SecondaryField(key: 'expiration', value: '01.01.2022', label: 'Valid Until'),
+//            ],
+//            backFields: [
+//                new Field(key: 'terms', value: 'Lorem Ipsum', label: 'Terms of Use'),
+//            ],
         );
 
         $pass
